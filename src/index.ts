@@ -17,10 +17,9 @@ app.post("/signup", async (req, res) => {
 
     // Insert into PostgreSQL
     const response = await pgClient.query(
-      "INSERT INTO users (username, password, email) VALUES ($1, $2, $3) RETURNING *",
+      "INSERT INTO users (username, password, email) VALUES ($1, $2, $3) RETURNING *", // preventing SQL injection
       [username, password, email]
     );
-
     console.log("User inserted successfully:", response.rows[0]);
 
     // Send success response
